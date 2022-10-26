@@ -1,0 +1,12 @@
+@Library('shared-jenkins-pipelines') _
+
+// source:
+// https://git.sudo.is/ben/shared-jenkins-pipelines/src/branch/main/vars/pythondocker.groovy
+
+poetry(
+    docker: true,
+    add_to_apt: true,
+    dockreg: "git.sudo.is/ben",
+    tag: "latest",
+    pypi: false
+)

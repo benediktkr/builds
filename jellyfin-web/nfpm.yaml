@@ -1,0 +1,39 @@
+---
+name: sudois-jellyfin-web
+version: v${version}
+
+arch: amd64
+platform: linux
+# example: extra
+# default for deb: optional
+priority: optional
+section: default
+
+maintainer: Ben Kristinsson <benedikt.k@gmail.com>
+description: sudo.is build of jellyfin-web
+homepage: https://git.sudo.is/ben/build-jellyfin-web
+
+replaces: []
+provides:
+  - jellyfin-web
+
+depends: []
+recommends: []
+suggests: []
+conflicts: []
+contents:
+  - src: /sudois/dist/webpack
+    dst: /usr/local/share/jellyfin-web/
+
+  - src: /usr/local/etc/jellyfin-web/config.json
+    dst: /usr/local/share/jellyfin-web/config.json
+    type: symlink
+  - src: /sudois/dist/etc/config.json
+    dst: /usr/local/etc/jellyfin-web/config.json
+    type: config|noreplace
+
+# scripts:
+#   preinstall: ./scripts/preinstall.sh
+#   postinstall: ./scripts/postinstall.sh
+#   preremove: ./scripts/preremove.sh
+#   postremove: ./scripts/postremove.sh

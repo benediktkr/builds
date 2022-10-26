@@ -1,0 +1,10 @@
+**/.git
+**/*Dockerfile*
+**/*docker-compose*
+**/node_modules
+
+jellyfin-web/build.sh
+jellyfin-web/bump_version
+jellyfin-web/debian
+jellyfin-web/fedora
+jellyfin-web/deployment
