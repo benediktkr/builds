@@ -10,6 +10,7 @@ docs:
 
  * https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/#build
  * https://github.com/badges/shields/blob/master/doc/self-hosting.md#separate-frontend-hosting
+ * https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-link/
 
 code: 
 
