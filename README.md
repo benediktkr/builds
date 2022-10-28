@@ -14,7 +14,7 @@ custom builds of assorted software
 ----------------------------------------|-------
  [`framework-ectool`](framework-ectool) | :github: [`DHowett/framework-ec`](https://github.com/DHowett/framework-ec)
  [`jellyfin-web`](jellyfin-web)         | :github: [`jellyfin/jellyfin-web`](https://github.com/jellyfin/jellyfin-web)
- [`shields`](shields)                   | :github: [`nitnelave/lldap`](https://github.com/badges/shields)
+ [`shields`](shields)                   | :github: [`badges/shields`](https://github.com/badges/shields)
 
 
 
