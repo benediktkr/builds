@@ -6,7 +6,17 @@ for making a build with a base url other than `/`.
 
 uses something called gatsbyjs. 
 
-docs: https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/#build
+docs: 
+
+ * https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/#build
+ * https://github.com/badges/shields/blob/master/doc/self-hosting.md#separate-frontend-hosting
+
+code: 
+
+ * https://github.com/badges/shields/blob/master/frontend/constants.ts#L1
+ * https://github.com/badges/shields/blob/master/.circleci/config.yml#L120 (set in ci tests)
+ * https://github.com/badges/shields/blob/master/services/github/auth/acceptor.js#L6
+ * search for `baseUrl` (what the variable is called): https://github.com/badges/shields/search?q=baseUrl
 
 in `Dockerfile`:
 
