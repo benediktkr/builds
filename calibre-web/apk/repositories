@@ -1,0 +1,9 @@
+https://dl-cdn.alpinelinux.org/alpine/latest-stable/main
+
+# defult for 'community: /latest-stable/community
+https://dl-cdn.alpinelinux.org/alpine/latest-stable/community
+# needed for py3-tzlocal: /edge/community
+#https://dl-cdn.alpinelinux.org/alpine/edge/community
+
+# needed for py3-cchardet, py3-levenshtein: /edge/testing
+https://dl-cdn.alpinelinux.org/alpine/edge/testing
