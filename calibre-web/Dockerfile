@@ -8,7 +8,7 @@ MAINTAINER Ben K <ben@lokun.is>
 ARG UID=1337
 RUN set -x && \
     adduser --disabled-password --uid ${UID} calibre-web && \
-    apk add --update --no-cache gcc musl-dev build-base libxml2-dev libxslt-dev py3-netifaces py3-lxml py3-ldap linux-headers
+    apk add --update --no-cache gcc musl-dev build-base libxml2-dev libxslt-dev py3-netifaces py3-lxml py3-pyldap linux-headers
 
 #RUN python3 -m pip install --upgrade pip
 ENV PATH "/home/calibre-web/.local/bin:$PATH"
