@@ -12,6 +12,7 @@ custom builds of assorted software
 
  project                                | upstream
 ----------------------------------------|-------
+ [`calibre-web`](calibre-web)           | :github: [`janeczku/calibre-web`](https://github.com/janeczku/calibre-web)
  [`framework-ectool`](framework-ectool) | :github: [`DHowett/framework-ec`](https://github.com/DHowett/framework-ec)
  [`jellyfin-web`](jellyfin-web)         | :github: [`jellyfin/jellyfin-web`](https://github.com/jellyfin/jellyfin-web)
  [`lldap`](lldap)                       | :github: [`nitnelave/lldap`](https://github.com/nitnelave/lldap)
