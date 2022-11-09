@@ -19,6 +19,9 @@ code:
  * https://github.com/badges/shields/blob/master/services/github/auth/acceptor.js#L6
  * search for `baseUrl` (what the variable is called): https://github.com/badges/shields/search?q=baseUrl
 
+ > No support for baseUrl or pathso use the `.js` or `.ts` files inside tsconfig.json
+
+https://www.gatsbyjs.com/docs/how-to/custom-configuration/typescript/
 in `Dockerfile`:
 
 ```Dockerfile
