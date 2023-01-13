@@ -49,7 +49,10 @@ RUN set -x && \
     tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock" && \
     tizen package -t wgt -o . -- .buildResult
 
-# builds:
+# install to an emulator (probably needs the package manager to be installed)
+#RUN set -x && tizen install -n Jellyfin.wgt -t T-samsung-5.5-x86
+
+# creates:
 # /usr/local/src/jellyfin-tizen/Jellyfin.wgt
 #
 # mkdir -p dist/
