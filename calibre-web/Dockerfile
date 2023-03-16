@@ -11,22 +11,29 @@ ARG UID=1337
 COPY apk/repositories /etc/apk/repositories
 
 RUN set -x && \
-  adduser --disabled-password --uid ${UID} calibre-web && \
-  apk add --update --no-cache py3-netifaces py3-lxml py3-pyldap py3-cryptography py3-greenlet cython && \
-  # not needed to avoid compiling a wheel, but speedier this way \
-  apk add --update --no-cache py3-openssl py3-tqdm py3-werkzeug py3-tz py3-tzdata py3-pypdf2 py3-tornado py3-sqlalchemy py3-dateutil py3-jsonschema py3-soupsieve
+    adduser --disabled-password --uid ${UID} calibre-web && \
+    apk add --update --no-cache py3-netifaces py3-lxml py3-pyldap py3-cryptography py3-greenlet cython && \
+    # not needed to avoid compiling a wheel, but speedier this way \
+    apk add --update --no-cache py3-openssl py3-tqdm py3-werkzeug py3-tz py3-tzdata py3-pypdf2 py3-tornado py3-sqlalchemy py3-dateutil py3-jsonschema py3-soupsieve && \
+    echo foo
 
 # needed (edge/testing)
-RUN apk add --update --no-cache py3-cchardet py3-levenshtein
+RUN apk add --update --no-cache py3-cchardet@testing py3-levenshtein@testing
 
 # goes faster
-#RUN apk add --update --no-cache py3-tzlocal
+RUN apk add --update --no-cache py3-tzlocal@edgecommunity
 
+# RUN set -x && \
+#     apk policy py3-pip && \
+#     apk --update --no-cache upgrade && \
+#     python3 -m pip install loguru && \
+#     apk policy py3-pip && \
+#     exit 1
 
 # py3-apscheduler py3-tzlocal
 #RUN python3 -m pip install --upgrade pip
 ENV PATH "/home/calibre-web/.local/bin:$PATH"
-ENV PYTHONPATH /usr/lib/python3.10/site-packages:/home/calibre-web/.local/lib/python3.10
+ENV PYTHONPATH "/usr/lib/python3.10/site-packages:/home/calibre-web/.local/lib/python3.10/site-packages/"
 
 USER calibre-web
 
@@ -43,6 +50,9 @@ RUN set -x && \
 
 # to print to console: docker run -e "FLASK_DEBUG=1"
 #ENV FLASK_DEBUG "1"
+
+# should update py3-pip (and get rid of the norice):
+# apk --update --no-cache upgrade
 
 ENV CALIBRE_PORT 8083
 EXPOSE 8083
