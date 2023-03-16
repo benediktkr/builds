@@ -7,13 +7,15 @@ ENV TERM=xterm-256color
 ARG UID=1337
 ARG GID=${UID}
 
+COPY deps.txt /tmp/deps.txt
 RUN set -x && \
     groupadd -g ${GID} owntone && \
-    useradd -u ${UID} -g ${GID} -ms /bin/bash owntone
+    useradd -u ${UID} -g ${GID} -ms /bin/bash owntone && \
+    apt-get -y update && \
+    apt-get install -y $(sed 's/\n/ /g' /tmp/deps.txt)
 
 FROM base as builder
 RUN set -x && \
-    apt-get update -y && \
     apt-get install -y \
     build-essential git autotools-dev autoconf automake libtool gettext gawk \
     gperf bison flex libconfuse-dev libunistring-dev libsqlite3-dev \
@@ -51,13 +53,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
 ENV TERM=xterm-256color
 
-COPY deps.txt /tmp/deps.txt
-RUN apt-get -y update && apt-get install -y $(sed 's/\n/ /g' /tmp/deps.txt)
-
 COPY --from=builder /usr/local/src/dist/owntone.tar.gz /tmp/
 COPY --from=builder /usr/local/src/dist/owntone_0.1.0_amd64.deb /tmp/
-RUN dpkg -i /tmp/owntone_0.1.0_amd64.deb
-
+RUN dpkg -i /tmp/owntone_0.1.0_amd64.deb && \
+    apt-get clean
 # RUN ldd /usr/sbin/owntone && dpkg-deb -c /tmp/owntone_0.1.0_amd64.deb && ls -ld /var/cache/owntone
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
