@@ -13,9 +13,11 @@ RUN set -x && \
 USER user
 WORKDIR /usr/src/lldap
 
+# remove npm from this step
+# npm install --quiet rollup && \
 RUN set -x && \
         cargo --quiet install wasm-pack cargo-chef && \
-        npm install --quiet rollup && \
+
         rustup target add wasm32-unknown-unknown
 
 # https://github.com/LukeMathWalker/cargo-chef
@@ -40,12 +42,19 @@ RUN set -x && \
 
 # and the frontend
 WORKDIR /usr/src/lldap/app
+# this creates /usr/src/lldap/app/node_modules
+RUN set -x && \
+        npm install --quiet rollup
+
 # this was in one && step, put it back like that when it works
-RUN set -x && wasm-pack build --target web
+RUN set -x && \
+        wasm-pack build --target web && \
+
+        /usr/src/lldap/app/node_modules/rollup/dist/bin/rollup ./main.js --format iife --file ./pkg/bundle.js --globals bootstrap:bootstrap
+
 # [INFO]: :-) Your wasm pkg is ready to publish at /usr/src/lldap/app/pkg.
-RUN set -x && npm install --quiet rollup
-# npm says: "up to date", so probably find it in parent ../node_modules ?
-RUN set -x /usr/src/lldap/node_modules/rollup/dist/bin/rollup /main.js --format iife --file ./pkg/bundle.js --globals bootstrap:bootstrap
+#RUN set -x && npm install --quiet rollup
+# npm says: "up to date", so probably find it in parent ../node_modules
 
 
 
@@ -53,6 +62,7 @@ RUN set -x /usr/src/lldap/node_modules/rollup/dist/bin/rollup /main.js --format 
 FROM base as final
 COPY --from=builder /usr/src/lldap/target/x86_64-unknown-linux-musl/release/lldap /usr/local/bin/lldap
 COPY --from=builder /usr/src/lldap/target/x86_64-unknown-linux-musl/release/migration-tool /usr/local/bin/migration-tool
+RUN du -sh /usr/local/bin/lldap /usr/local/bin/migration-tool
 
 # bind mount over this file
 COPY lldap/lldap_config.docker_template.toml /etc/lldap/config.toml
