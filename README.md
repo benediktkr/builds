@@ -12,12 +12,13 @@ custom builds of assorted software
 
 these builds are working (in use in the `sudo.is` infra) and can in theory be publicly used:
 
- project                                | upstream                                                                          | notes
-----------------------------------------|-----------------------------------------------------------------------------------|----
- [`airconnect`](airconnect)             | :github: [`philippe44/AirConnect`](https://github.com/philippe44/AirConnect)      | docker only
- [`framework-ectool`](framework-ectool) | :github: [`DHowett/framework-ec`](https://github.com/DHowett/framework-ec)        |
- [`jellyfin-tizen`](jellyfin-tizen)     | :github: [`jellyfin/jellyfin-tizen`](https://github.com/jellyfin/jellyfin-tizen)  |
- [`owntone`](owntone)                   | :github: [`owntone/owntone`](https://github.com/owntone/owntone-server)           |
+ project                                | upstream                                                                           | notes
+----------------------------------------|------------------------------------------------------------------------------------|----
+ [`airconnect`](airconnect)             | :github: [`philippe44/AirConnect`](https://github.com/philippe44/AirConnect)       | docker only
+ [`framework-ectool`](framework-ectool) | :github: [`DHowett/framework-ec`](https://github.com/DHowett/framework-ec)         |
+ [`jellyfin-tizen`](jellyfin-tizen)     | :github: [`jellyfin/jellyfin-tizen`](https://github.com/jellyfin/jellyfin-tizen)   |
+ [`owntone`](owntone)                   | :github: [`owntone/owntone`](https://github.com/owntone/owntone-server)            |
+ [`shairport`](shairport)               | :github: [`mikebrady/shairport-sync`](https://github.com/mikebrady/shairport-sync) | docker only
 
 
 ### in progress / not ready

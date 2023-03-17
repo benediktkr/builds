@@ -1,0 +1,16 @@
+# Example docker compose config.
+
+services:
+  shairport:
+    image: shairport:latest
+    network_mode: host
+    restart: unless-stopped
+    devices:
+      - "/dev/snd"
+    volumes:
+      - ./shairport-sync.conf:/etc/shairport-sync.conf
+      - /deadspace/owntone/audio/pipes/:/pipes/
+    logging:
+      options:
+        max-size: "200k"
+        max-file: "10"
