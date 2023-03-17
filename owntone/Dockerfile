@@ -24,9 +24,7 @@ RUN set -x && \
     libevent-dev libplist-dev libsodium-dev libjson-c-dev libwebsockets-dev \
     libcurl4-openssl-dev libprotobuf-c-dev libpulse-dev libgnutls*-dev \
     ruby ruby-dev rubygems && \
-    gem install --no-document fpm
-
-RUN set -x && \
+    gem install --no-document fpm && \
     chown -R owntone:owntone /usr/local/src/
 
 
@@ -56,10 +54,16 @@ ENV TERM=xterm-256color
 COPY --from=builder /usr/local/src/dist/owntone.tar.gz /tmp/
 COPY --from=builder /usr/local/src/dist/owntone_0.1.0_amd64.deb /tmp/
 RUN dpkg -i /tmp/owntone_0.1.0_amd64.deb && \
-    apt-get clean
+    apt-get clean && \
+    chown owntone:owntone /var/cache/owntone && \
+    echo touch /var/log/owntone.log && \
+    echo chown owntone:owntone /var/log/owntone.log
+
+    
 # RUN ldd /usr/sbin/owntone && dpkg-deb -c /tmp/owntone_0.1.0_amd64.deb && ls -ld /var/cache/owntone
-
+COPY docker/owntone.conf /etc/owntone.conf
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-ENTRYPOINT /usr/local/bin/entrypoint.sh
-
+#USER owntone
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["-f"]
 
