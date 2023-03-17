@@ -5,8 +5,9 @@ patch -u web-src/src/mystyles.scss -i /usr/local/src/dark.patch
 autoreconf -i
 
 # --enable-static  --disable-shared
+# -enable-prefairplay2
 ./configure --with-pulseaudio --with-avahi \
-  --enable-prefairplay2 --enable-chromecast --enable-lastfm \
+  --enable-chromecast --enable-lastfm \
   --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
 
 make
