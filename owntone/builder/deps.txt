@@ -9,6 +9,7 @@ libavahi-client-dev
 libwebsockets-dev
 libpulse-dev
 libasound2-dev
+libavahi-client-dev
 avahi-daemon
 sqlite3
 libavcodec-dev
