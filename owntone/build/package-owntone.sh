@@ -25,7 +25,6 @@ set -e
         -t deb $DEPS\
         --deb-default target/etc/owntone.conf \
         --deb-systemd target/etc/systemd/system/owntone.service \
-        --deb-systemd-restart-after-upgrade \
         --config-files /etc/owntone.conf \
         --after-install /usr/local/src/after-install.sh \
         -n ${NAME} \
@@ -39,6 +38,7 @@ set -e
 
         # --deb-systemd-auto-start \
         # --deb-systemd-enable \
+        # --deb-systemd-restart-after-upgrade \
 
     # mv -v *.deb target/
     dpkg-deb -I *.deb

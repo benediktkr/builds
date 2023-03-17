@@ -7,7 +7,7 @@ ENV TERM=xterm-256color
 ARG UID=1337
 ARG GID=${UID}
 
-COPY deps.txt /tmp/deps.txt
+COPY /build/deps.txt /tmp/deps.txt
 RUN set -x && \
     groupadd -g ${GID} owntone && \
     useradd -u ${UID} -g ${GID} -ms /bin/bash owntone && \
@@ -34,13 +34,12 @@ RUN mkdir ${DISTDIR}
 
 COPY --chown=owntone:owntone owntone-apt/ /usr/local/src/owntone-apt/
 COPY --chown=owntone:owntone owntone-server/ /usr/local/src/owntone-server/
-COPY --chown=owntone:owntone build-owntone.sh /usr/local/bin/build-owntone.sh
+COPY --chown=owntone:owntone build/build-owntone.sh /usr/local/bin/build-owntone.sh
 WORKDIR /usr/local/src/owntone-server/
 RUN /usr/local/bin/build-owntone.sh
 
-COPY --chown=owntone:owntone package-owntone.sh /usr/local/bin/package-owntone.sh
-COPY --chown=owntone:owntone after-install.sh /usr/local/src/after-install.sh
-COPY deps.txt /tmp/deps.txt
+COPY --chown=owntone:owntone build/package-owntone.sh /usr/local/bin/package-owntone.sh
+COPY --chown=owntone:owntone build/after-install.sh /usr/local/src/after-install.sh
 WORKDIR /usr/local/src/dist
 
 RUN /usr/local/bin/package-owntone.sh 
@@ -62,7 +61,7 @@ RUN dpkg -i /tmp/owntone_0.1.0_amd64.deb && \
     
 # RUN ldd /usr/sbin/owntone && dpkg-deb -c /tmp/owntone_0.1.0_amd64.deb && ls -ld /var/cache/owntone
 COPY docker/owntone.conf /etc/owntone.conf
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 #USER owntone
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["-f"]
