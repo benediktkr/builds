@@ -14,7 +14,7 @@ set -e
     #echo "version: $VERSION"
 
     NAME="owntone"
-    VERSION="0.1.0"
+    VERSION=$(./target/usr/sbin/owntone --version | cut -d' ' -f2)
 
     DEPS=""
     while read -r dep; do

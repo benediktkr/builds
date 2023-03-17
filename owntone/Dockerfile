@@ -52,8 +52,8 @@ ENV TZ=UTC
 ENV TERM=xterm-256color
 
 COPY --from=builder /usr/local/src/dist/owntone.tar.gz /tmp/
-COPY --from=builder /usr/local/src/dist/owntone_0.1.0_amd64.deb /tmp/
-RUN dpkg -i /tmp/owntone_0.1.0_amd64.deb && \
+COPY --from=builder /usr/local/src/dist/owntone_*_amd64.deb /tmp/
+RUN dpkg -i /tmp/owntone_*_amd64.deb && \
     apt-get clean && \
     chown owntone:owntone /var/cache/owntone && \
     echo touch /var/log/owntone.log && \
