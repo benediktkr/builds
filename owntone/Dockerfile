@@ -7,7 +7,7 @@ ENV TERM=xterm-256color
 ARG UID=1208
 ARG GID=1301
 
-COPY /build/deps.txt /tmp/deps.txt
+COPY /builder/deps.txt /tmp/deps.txt
 RUN set -x && \
     groupadd -g ${GID} owntone && \
     useradd -u ${UID} -g ${GID} -ms /bin/bash owntone && \
@@ -34,12 +34,13 @@ RUN mkdir ${DISTDIR}
 
 COPY --chown=owntone:owntone owntone-apt/ /usr/local/src/owntone-apt/
 COPY --chown=owntone:owntone owntone-server/ /usr/local/src/owntone-server/
-COPY --chown=owntone:owntone build/build-owntone.sh /usr/local/bin/build-owntone.sh
+COPY --chown=owntone:owntone builder/build-owntone.sh /usr/local/bin/build-owntone.sh
+COPY --chown=owntone:owntone builder/dark.patch /usr/local/src/dark.patch
 WORKDIR /usr/local/src/owntone-server/
 RUN /usr/local/bin/build-owntone.sh
 
-COPY --chown=owntone:owntone build/package-owntone.sh /usr/local/bin/package-owntone.sh
-COPY --chown=owntone:owntone build/after-install.sh /usr/local/src/after-install.sh
+COPY --chown=owntone:owntone builder/package-owntone.sh /usr/local/bin/package-owntone.sh
+COPY --chown=owntone:owntone builder/after-install.sh /usr/local/src/after-install.sh
 WORKDIR /usr/local/src/dist
 
 RUN /usr/local/bin/package-owntone.sh 
