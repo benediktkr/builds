@@ -27,7 +27,7 @@ the dependencies for building.
 
 ## run
 
-```
+```shell
 docker run --name owntone -it --net=host \
    -v owntone.conf:/etc/owntone.conf \
    -v owntone.log:/var/log/owntone.log \

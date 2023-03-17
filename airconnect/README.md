@@ -18,7 +18,7 @@ containers:
 
 for `airupnp` (UPnP/Sonos):
 
-```
+```shell
 # pass cmdline args:
 docker run --name airconnect-airupnp -it --net=host \
     git.sudo.is/ben/airconnect airupnp -l 1000:2000
@@ -30,7 +30,8 @@ docker run --name airconnect-airupnp -it --net=host \
 ```
 
 for `aircast` (Chromecast):
-```
+
+```shell
 docker run --name airconnect-aircast -it --net=host \
     git.sudo.is/ben/airconnect aircast
 ```
