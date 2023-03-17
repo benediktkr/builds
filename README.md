@@ -12,11 +12,13 @@ custom builds of assorted software
 
  project                                | upstream
 ----------------------------------------|-------
+ [`airconnect`](airconnect)             | :github: [`philippe44/AirConnect`](https://github.com/philippe44/AirConnect)
  [`calibre-web`](calibre-web)           | :github: [`janeczku/calibre-web`](https://github.com/janeczku/calibre-web)
  [`framework-ectool`](framework-ectool) | :github: [`DHowett/framework-ec`](https://github.com/DHowett/framework-ec)
  [`jellyfin-web`](jellyfin-web)         | :github: [`jellyfin/jellyfin-web`](https://github.com/jellyfin/jellyfin-web)
  [`jellyfin-tizen`](jellyfin-tizen)     | :github: [`jellyfin/jellyfin-tizen`](https://github.com/jellyfin/jellyfin-tizen)
  [`lldap`](lldap)                       | :github: [`nitnelave/lldap`](https://github.com/nitnelave/lldap)
+ [`owntone`](owntone)                   | :github: [`owntone/owntone`](https://github.com/owntone/owntone-server)
  [`shields`](shields)                   | :github: [`badges/shields`](https://github.com/badges/shields)
 
 
