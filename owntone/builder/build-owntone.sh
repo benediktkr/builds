@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-# patch -u web-src/src/mystyles.scss -i /usr/local/src/dark.patch
+patch -u web-src/src/mystyles.scss -i /usr/local/src/dark.patch
 autoreconf -i
 
 # --enable-static  --disable-shared
