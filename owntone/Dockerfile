@@ -4,8 +4,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
 ENV TERM=xterm-256color
 
-ARG UID=1337
-ARG GID=${UID}
+ARG UID=1208
+ARG GID=1301
 
 COPY /build/deps.txt /tmp/deps.txt
 RUN set -x && \
