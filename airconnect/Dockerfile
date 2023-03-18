@@ -15,5 +15,6 @@ RUN set -x && \
     chmod +x /usr/local/bin/airupnp && \
     chmod +x /usr/local/bin/aircast
 
+ENV AIRCONNECT_AIRUPNP_CONFIG="/etc/airupnp.xml"
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD []
