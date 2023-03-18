@@ -35,3 +35,28 @@ for `aircast` (Chromecast):
 docker run --name airconnect-aircast -it --net=host \
     git.sudo.is/ben/airconnect aircast
 ```
+
+you can also set the environment vars `${AIRCONNECT_PROG}` and
+`${AIRCONNECT_ARGS}` respectively instead. this is for example useful
+in ansible playbooks using `docker_container` tasks:
+
+```yaml
+- name: "start airconnect containers"
+  docker_container:
+    name: airconnect-{{ item }}
+    hostname: airconnect-{{ item }}
+    image: git.sudo.is/ben/airconnect
+    detach: true
+    pull: true
+    auto_remove: false
+    restart_policy: "unless-stopped"
+    state: "started"
+    network_mode: host
+    env:
+      AIRCONNECT_PROG: "{{ item }}"
+  loop_control:
+    label: airconnect-{{ item }}
+  with_items:
+    - airupnp
+    - aircast
+```
