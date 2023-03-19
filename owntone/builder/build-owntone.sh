@@ -16,3 +16,7 @@ mkdir ${DISTDIR}/target
 DESTDIR=${DISTDIR}/target make install
 
 tar -C ${DISTDIR}/target/ -czf ${DISTDIR}/owntone.tar.gz ${DISTDIR}/target/
+
+echo
+echo "VITE_OWNTONE_URL=$VITE_OWNTONE_URL"
+echo

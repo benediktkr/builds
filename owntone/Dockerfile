@@ -30,20 +30,23 @@ RUN set -x && \
 
 USER owntone
 ENV DISTDIR=/usr/local/src/dist/
-RUN mkdir ${DISTDIR} 
+RUN mkdir ${DISTDIR}
 
 COPY --chown=owntone:owntone owntone-apt/ /usr/local/src/owntone-apt/
 COPY --chown=owntone:owntone owntone-server/ /usr/local/src/owntone-server/
 COPY --chown=owntone:owntone builder/build-owntone.sh /usr/local/bin/build-owntone.sh
 COPY --chown=owntone:owntone builder/dark.patch /usr/local/src/dark.patch
 WORKDIR /usr/local/src/owntone-server/
+# TODO: figure out how to override at runtime
+ARG VITE_OWNTONE_URL="owntone.local:3689"
+ENV VITE_OWNTONE_URL="${VITE_OWNTONE_URL}"
 RUN /usr/local/bin/build-owntone.sh
 
 COPY --chown=owntone:owntone builder/package-owntone.sh /usr/local/bin/package-owntone.sh
 COPY --chown=owntone:owntone builder/after-install.sh /usr/local/src/after-install.sh
 WORKDIR /usr/local/src/dist
 
-RUN /usr/local/bin/package-owntone.sh 
+RUN /usr/local/bin/package-owntone.sh
 
 
 FROM base as final
@@ -59,11 +62,10 @@ RUN dpkg -i /tmp/owntone_*_amd64.deb && \
     echo touch /var/log/owntone.log && \
     echo chown owntone:owntone /var/log/owntone.log
 
-    
+
 # RUN ldd /usr/sbin/owntone && dpkg-deb -c /tmp/owntone_0.1.0_amd64.deb && ls -ld /var/cache/owntone
 COPY docker/owntone.conf /etc/owntone.conf
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 #USER owntone
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["-f"]
-
