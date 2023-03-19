@@ -38,6 +38,7 @@ COPY --chown=owntone:owntone builder/build-owntone.sh /usr/local/bin/build-ownto
 COPY --chown=owntone:owntone builder/dark.patch /usr/local/src/dark.patch
 WORKDIR /usr/local/src/owntone-server/
 # TODO: figure out how to override at runtime
+# https://owntone.github.io/owntone-server/clients/web-interface/
 ARG VITE_OWNTONE_URL="owntone.local:3689"
 ENV VITE_OWNTONE_URL="${VITE_OWNTONE_URL}"
 RUN /usr/local/bin/build-owntone.sh
