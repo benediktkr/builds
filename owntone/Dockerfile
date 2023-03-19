@@ -39,6 +39,7 @@ COPY --chown=owntone:owntone builder/dark.patch /usr/local/src/dark.patch
 WORKDIR /usr/local/src/owntone-server/
 # TODO: figure out how to override at runtime
 # https://owntone.github.io/owntone-server/clients/web-interface/
+# https://github.com/owntone/owntone-server/blob/master/web-src/vite.config.js
 ARG VITE_OWNTONE_URL="owntone.local:3689"
 ENV VITE_OWNTONE_URL="${VITE_OWNTONE_URL}"
 RUN /usr/local/bin/build-owntone.sh
@@ -61,7 +62,8 @@ RUN dpkg -i /tmp/owntone_*_amd64.deb && \
     apt-get clean && \
     chown owntone:owntone /var/cache/owntone && \
     echo touch /var/log/owntone.log && \
-    echo chown owntone:owntone /var/log/owntone.log
+    echo chown owntone:owntone /var/log/owntone.log && \
+    echo "\nVITE_OWNTONE_URL=$VITE_OWNTONE_URL\n"
 
 
 # RUN ldd /usr/sbin/owntone && dpkg-deb -c /tmp/owntone_0.1.0_amd64.deb && ls -ld /var/cache/owntone
