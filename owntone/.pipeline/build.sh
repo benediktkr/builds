@@ -21,3 +21,5 @@ docker build --pull --build-arg "VITE_OWNTONE_URL=$VITE_OWNTONE_URL" --target bu
 docker run -u $(id -u) --name owntone-build --rm -it -v $(pwd)/dist/:/mnt/dist/ owntone:latest-builder cp -r /usr/local/src/dist/. /mnt/dist/
 
 docker build --pull --build-arg "VITE_OWNTONE_URL=$VITE_OWNTONE_URL" -t ${DOCKER_REPO}/owntone:latest .
+
+echo "$VITE_OWNTONE_URL"
