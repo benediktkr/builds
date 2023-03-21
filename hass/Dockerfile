@@ -3,6 +3,6 @@
 
 FROM home-assistant:stable
 
-RUN apt-get install python3-dev libcups2-dev
+RUN apt-get -y install python3-dev libcups2-dev
 
 
