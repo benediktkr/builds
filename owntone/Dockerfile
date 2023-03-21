@@ -40,7 +40,6 @@ WORKDIR /usr/local/src/owntone-server/
 # TODO: figure out how to override at runtime
 # https://owntone.github.io/owntone-server/clients/web-interface/
 # https://github.com/owntone/owntone-server/blob/master/web-src/vite.config.js
-ARG VITE_OWNTONE_URL
 RUN /usr/local/bin/build-owntone.sh
 
 COPY --chown=owntone:owntone builder/package-owntone.sh /usr/local/bin/package-owntone.sh
@@ -54,7 +53,6 @@ FROM base as final
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
 ENV TERM=xterm-256color
-ARG VITE_OWNTONE_URL
 
 COPY --from=builder /usr/local/src/dist/owntone.tar.gz /tmp/
 COPY --from=builder /usr/local/src/dist/owntone_*_amd64.deb /tmp/
@@ -64,9 +62,7 @@ RUN dpkg -i /tmp/owntone_*_amd64.deb && \
     rm /tmp/owntone.tar.gz  && \
     rm /tmp/owntone_*_amd64.deb && \
     echo touch /var/log/owntone.log && \
-    echo chown  owntone:owntone /var/log/owntone.log && \
-    echo "\nVITE_OWNTONE_URL=$VITE_OWNTONE_URL\n"
-
+    echo chown  owntone:owntone /var/log/owntone.log
 
 # RUN ldd /usr/sbin/owntone && dpkg-deb -c /tmp/owntone_0.1.0_amd64.deb && ls -ld /var/cache/owntone
 COPY docker/owntone.conf /etc/owntone.conf
