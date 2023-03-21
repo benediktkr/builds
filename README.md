@@ -34,9 +34,9 @@ these builds are not ready yet, and are at various stages of 'in progress':
 
 ## other build repos
 
- * [ben/emacs-docker](https://git.sudo.is/ben/emacs-docker): compiles emacs from source and publishes as `.deb` packages for ubuntu and debian on `apt.sudo.is`.
- * [ben/hydrogen-docker](https://git.sudo.is/ben/hydrogen-docker): builds [hydrogen](https://matrix.org/docs/projects/client/hydrogen) as static html/jss/cs files as a `.deb.` package, published on `apt.sudo.is`.
- * [ben/playonlinux-docker](https://git.sudo.is/ben/socat-dns-docker): play windows games in docker with [PlayOnLinux](https://www.playonlinux.com/en/).
+ * [`ben/emacs-docker`](https://git.sudo.is/ben/emacs-docker): compiles emacs from source and publishes as `.deb` packages for ubuntu and debian on `apt.sudo.is`.
+ * [`ben/hydrogen-docker`](https://git.sudo.is/ben/hydrogen-docker): builds [hydrogen](https://matrix.org/docs/projects/client/hydrogen) as static html/jss/cs files as a `.deb.` package, published on `apt.sudo.is`.
+ * [`ben/playonlinux-docker`](https://git.sudo.is/ben/socat-dns-docker): play windows games in docker with [PlayOnLinux](https://www.playonlinux.com/en/).
 
 ## repos
 
