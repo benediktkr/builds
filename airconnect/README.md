@@ -21,13 +21,17 @@ for `airupnp` (UPnP/Sonos):
 ```shell
 # pass cmdline args:
 docker run --name airconnect-airupnp -it --net=host \
-    git.sudo.is/ben/airconnect airupnp -l 1000:2000
+    git.sudo.is/ben/airconnect airupnp -Z -l 1000:2000
 
 # if you want to mount an /etc/airupnp.xml config file instead:
 docker run --name airconnect-airupnp -it --net=host \
     -v airupnp.xml:/etc/airupnp.xml \
     git.sudo.is/ben/airconnect airupnp
 ```
+
+here the `-Z` argument is importabt, it instructs
+airconnect to not listen to input on stdin. otherwise
+it will loop indefinitely and use 100% cpu.
 
 for `aircast` (Chromecast):
 
