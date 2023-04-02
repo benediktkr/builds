@@ -38,7 +38,7 @@ fi
 if [ "$ARGS" = "" ]; then
     if [ "$PROG" = "airupnp" ]; then
         # set default args for airupnp if not set
-        ARGS="-x $AIRCONNECT_AIRUPNP_CONFIG"
+        ARGS="-Z -x $AIRCONNECT_AIRUPNP_CONFIG"
 
     elif [ "$PROG" = "aircast" ]; then
         # no default args for aircast
