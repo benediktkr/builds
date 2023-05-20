@@ -2,17 +2,21 @@
 
 set -e
 
+# copy dark-reader.css file from dark-reader (firefox extension), and
+# the modified index.html. both were placed in
+# /usr/local/src/dark-reader during the 'docker build`, and copy them
+# inside of the owntone build before we package it up
+
+cp -v /usr/local/src/dark-reader/dark-reader.css ${DISTDIR}/target/usr/share/owntone/htdocs/assets/dark-reader.css
+cp -v /usr/local/src/dark-reader/index.html ${DISTDIR}/target/usr/share/owntone/htdocs/index.html
+
+echo "cat index.html"
+
+cat ${DISTDIR}/target/usr/share/owntone/htdocs/index.html
+
+tar -C ${DISTDIR}/target/ -czf ${DISTDIR}/owntone.tar.gz ${DISTDIR}/target/
+
 (
-    #cd /usr/local/dist/
-    #mkdir -v bin target
-
-
-    #cp -v /usr/local/src/blink1-tool/blink1-tool bin/
-    #cp -v /usr/local/src/blink1-tool/blink1-tiny-server bin/
-
-    #VERSION=$(bin/blink1-tool --version | awk  '{print $3}' | cut -d'-' -f1 | sed -e '1s/^v//')
-    #echo "version: $VERSION"
-
     NAME="owntone"
     VERSION=$(./target/usr/sbin/owntone --version | cut -d' ' -f2)
 
@@ -32,49 +36,8 @@ set -e
         -a $(dpkg --print-architecture) \
         -s dir target/=/
 
-    #        --deb-custom-control debian/control \
-    #--deb-auto-config-files \
-    #etc/21-blink1.rules=/etc/udev/rules.d/21-blink1.rules
-
-        # --deb-systemd-auto-start \
-        # --deb-systemd-enable \
-        # --deb-systemd-restart-after-upgrade \
-
-    # mv -v *.deb target/
     dpkg-deb -I *.deb
     ls -lah *.deb
 
 
 )
-
-
-# ls /usr/local/src/owntone-apt/
-# cp -rv /usr/local/src/owntone-apt/owntone-server/debian/ /usr/local/src/owntone-server/
-# echo "1"
-# sudo OS=debian DIST=buster ARCH=amd64 pbuilder create --configfile /usr/local/src/owntone-apt/pbuilderrc
-# DEBEMAIL=systems@sudo.is dch --create --package owntone --newversion 28.6.125.gitf9c50b8-1+buster --distribution buster --force-distribution "Dummy changelog @commit f9c50b80fc5a18e1c39dd7639be9ee178110f2b3"
-
-# echo "2"
-# OS=debian DIST=buster ARCH=amd64 DEB_BUILD_OPTIONS="parallel=$(nproc) nocheck" pdebuild --configfile /usr/local/src/owntone-apt/pbuilderrc
-
-#dpkg-deb -c *.deb
-
-
-#        -d libavformat-dev \
-#        -d libasound2-dev \
-#        -d libplist-dev \
-#        -d libevent-dev \
-#        -d libcurl4-openssl-dev \
-#        -d libconfuse-dev \
-#        -d libprotobuf-c-dev \
-#        -d libavahi-client-dev \
-#        -d libwebsockets-dev \
-#        -d libpulse-dev \
-#        -d libasound2-dev \
-#        -d avahi-daemon \
-#        -d sqlite3 \
-#        -d libavcodec-dev \
-#        -d libavfilter-dev \
-#        -d systemd \
-#        -d libmxml-dev \
-

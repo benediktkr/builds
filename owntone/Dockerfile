@@ -35,15 +35,20 @@ RUN mkdir ${DISTDIR}
 COPY --chown=owntone:owntone owntone-apt/ /usr/local/src/owntone-apt/
 COPY --chown=owntone:owntone owntone-server/ /usr/local/src/owntone-server/
 COPY --chown=owntone:owntone builder/build-owntone.sh /usr/local/bin/build-owntone.sh
-COPY --chown=owntone:owntone builder/dark.patch /usr/local/src/dark.patch
 WORKDIR /usr/local/src/owntone-server/
 # TODO: figure out how to override at runtime
 # https://owntone.github.io/owntone-server/clients/web-interface/
 # https://github.com/owntone/owntone-server/blob/master/web-src/vite.config.js
+
+
 RUN /usr/local/bin/build-owntone.sh
 
 COPY --chown=owntone:owntone builder/package-owntone.sh /usr/local/bin/package-owntone.sh
 COPY --chown=owntone:owntone builder/after-install.sh /usr/local/src/after-install.sh
+
+# copy css file from dark-reader (firefox extension) and a modified index.html
+COPY --chown=owntone:owntone dark-reader/ /usr/local/src/dark-reader/
+
 WORKDIR /usr/local/src/dist
 
 RUN /usr/local/bin/package-owntone.sh
