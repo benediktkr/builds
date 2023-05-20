@@ -27,13 +27,11 @@ rm -v ./dist/*.deb || true
 #   git diff --patch > ../dark-reader-css.patch
 
 # chdir into the git tree to apply the patch
-cp -v dark-reader-css.patch owntone-server/
 (
     # copy into the git tree and apply the patch
     cd owntone-server/
-    git apply dark-reader-css.patch
+    git apply ../dark-reader-css.patch
 )
-rm owntone-server/dark-reader-css.patch
 
 # then copy the css file
 cp dark-reader.css owntone-server/htdocs/assets
