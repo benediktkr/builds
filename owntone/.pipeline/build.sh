@@ -12,10 +12,35 @@ fi
 
 . ./.pipeline/init-git.sh
 
+
 mkdir -pv ./dist/
 rm -rv ./dist/target || true
 rm -v ./dist/*.tar.gz || true
 rm -v ./dist/*.deb || true
+
+
+# try adding dark-reader generated css file. this applies a patch that adds it to
+# the Makefile that builds htdocs, and adds it to index.html after the original
+# index.css file loads
+#
+# create the .patch file with (dont include the huge css file):
+#   git diff --patch > ../dark-reader-css.patch
+
+# chdir into the git tree to apply the patch
+cp -v dark-reader-css.patch owntone-server/
+(
+    # copy into the git tree and apply the patch
+    cd owntone-server/
+    git apply dark-reader-css.patch
+)
+rm owntone-server/dark-reader-css.patch
+
+# then copy the css file
+cp dark-reader.css owntone-server/htdocs/assets
+
+
+git --no-pager diff --color=always
+cp ../
 
 docker build --pull --build-arg "VITE_OWNTONE_URL=$VITE_OWNTONE_URL" --target builder -t owntone:latest-builder .
 docker run -u $(id -u) --name owntone-build --rm -it -v $(pwd)/dist/:/mnt/dist/ owntone:latest-builder cp -r /usr/local/src/dist/. /mnt/dist/

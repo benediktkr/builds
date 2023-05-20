@@ -1,0 +1,41 @@
+.vimvixen-hint {
+    background-color: #8f6a0a !important;
+    border-color: #f8d03e !important;
+    color: #ffffe8 !important;
+}
+::placeholder {
+    opacity: 0.5 !important;
+}
+#edge-translate-panel-body,
+.MuiTypography-body1,
+.nfe-quote-text {
+    color: var(--darkreader-neutral-text) !important;
+}
+gr-main-header {
+    background-color: #294c55 !important;
+}
+.tou-z65h9k,
+.tou-mignzq,
+.tou-1b6i2ox,
+.tou-lnqlqk {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+.tou-75mvi {
+    background-color: #182f35 !important;
+}
+.tou-ta9e87,
+.tou-1w3fhi0,
+.tou-1b8t2us,
+.tou-py7lfi,
+.tou-1lpmd9d,
+.tou-1frrtv8,
+.tou-17ezmgn {
+    background-color: #191817 !important;
+}
+.tou-uknfeu {
+    background-color: #322614 !important;
+}
+.tou-6i3zyv {
+    background-color: #386b79 !important;
+}
+embed[type="application/pdf"] { filter: invert(100%) contrast(90%); }
