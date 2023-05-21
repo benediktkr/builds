@@ -7,7 +7,7 @@ set -e
 # /usr/local/src/dark-reader during the 'docker build`, and copy them
 # inside of the owntone build before we package it up
 
-cp -v /usr/local/src/dark-reader/dark-reader.css ${DISTDIR}/target/usr/share/owntone/htdocs/assets/dark-reader.css
+cp -v /usr/local/src/dark-reader/dark-reader-full.css ${DISTDIR}/target/usr/share/owntone/htdocs/assets/dark-reader-full.css
 cp -v /usr/local/src/dark-reader/index.html ${DISTDIR}/target/usr/share/owntone/htdocs/index.html
 
 echo "cat index.html"

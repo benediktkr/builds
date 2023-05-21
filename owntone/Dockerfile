@@ -40,7 +40,6 @@ WORKDIR /usr/local/src/owntone-server/
 # https://owntone.github.io/owntone-server/clients/web-interface/
 # https://github.com/owntone/owntone-server/blob/master/web-src/vite.config.js
 
-
 RUN /usr/local/bin/build-owntone.sh
 
 COPY --chown=owntone:owntone builder/package-owntone.sh /usr/local/bin/package-owntone.sh
