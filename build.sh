@@ -3,17 +3,41 @@
 set -e
 
 usage() {
-    echo "$0 <project>"
+    echo "$0 <project> [--docker-push]"
     exit 1
 }
 
-if [ "$1" = "" ]; then
+if [[ "$1" = "" ]]; then
     usage
 else
     PROJECT=$1
     PROJECT_PIPELINE=./${PROJECT}/.pipeline
     shift
+    if [[ "$1" == "--docker-push" && -f "${PROJECT_PIPELINE}/docker-push.sh"  ]]; then
+        DOCKER_PUSH="true"
+    else
+        DOCKER_PUSH="false"
+    fi
 fi
+
+if [[ -f "${PROJECT_PIPELINE}/build.sh" && "${PROJECT}" == "owntone" ]]; then
+    (
+        set -e
+        cd ./$PROJECT
+        . .pipeline/build.sh
+
+        echo "[build.sh] executed '${PROJECT_PIPELINE}/build.sh' and exited with '$?'"
+        echo
+
+        if [[ "${DOCKER_PUSH}" == "true" ]]; then
+            . .pipeline/docker-push.sh
+            echo "[build.sh] executed '${PROJECT_PIPELINE}/docker-push.sh' and exited with '$?'"
+            echo
+        fi
+    )
+    exit 0
+fi
+
 
 for f in ${PROJECT_PIPELINE}/*.env; do
     echo "sourcing: $f"
@@ -22,12 +46,12 @@ for f in ${PROJECT_PIPELINE}/*.env; do
 done
 echo && echo
 
-if [ "${DOCKER_REPO}" = "" ]; then
+if [[ "${DOCKER_REPO}" = "" ]]; then
     # default if not explicitly set in project
     DOCKER_REPO="git.sudo.is/ben"
 fi
 
-if [ -f "${PROJECT_PIPELINE}/init-git.sh" ]; then
+if [[ -f "${PROJECT_PIPELINE}/init-git.sh" ]]; then
     echo "running 'init-git.sh' for ${PROJECT}"
     (
         set -e
@@ -42,24 +66,24 @@ echo && echo
 echo "cleaning up ${PROJECT}/dist"
 mkdir -pv ./${PROJECT}/dist
 
-if [ -d ./${PROJECT}/dist/target ]; then
+if [[ -d ./${PROJECT}/dist/target ]]; then
     echo "removing directory '${PROJECT}/dist/target'"
     rm -r ${PROJECT}/dist/target
 fi
 
-if [ -f "./${PROJECT}/dist/*.tar.gz" ]; then
+if [[ -f "./${PROJECT}/dist/*.tar.gz" ]]; then
     rm -v ./${PROJECT}/dist/*.tar.gz
 fi
-if [ -f "./${PROJECT}/dist/*.tar.gz2" ]; then
+if [[ -f "./${PROJECT}/dist/*.tar.gz2" ]]; then
     rm -v ./${PROJECT}/dist/*.tar.gz2
 fi
-if [ -f "./${PROJECT}/dist/*.deb" ]; then
+if [[ -f "./${PROJECT}/dist/*.deb" ]]; then
     rm -v ./${PROJECT}/dist/*.deb
 fi
 echo && echo
 
 BUILD_ARGS_FILE="${PROJECT_PIPELINE}/docker-build-args"
-if [ -f "$BUILD_ARGS_FILE" ]; then
+if [[ -f "$BUILD_ARGS_FILE" ]]; then
    echo "found docker-build-args file"
    cat $BUILD_ARGS_FILE
 
