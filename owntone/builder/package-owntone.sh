@@ -33,6 +33,11 @@ tar -C ${DISTDIR}/target/ -czf ${DISTDIR}/owntone.tar.gz ${DISTDIR}/target/
     NAME="owntone"
     VERSION=$(./target/usr/sbin/owntone --version | cut -d' ' -f2)
 
+    if [[ ! "${VERSION}" =~ "^[0-9].*$" ]]; then
+        echo "using git tag for version instead"
+        VERSION=${LATEST_GIT_TAG}
+    fi
+
     DEPS=""
     while read -r dep; do
         DEPS="${DEPS} -d $dep"

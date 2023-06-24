@@ -42,6 +42,8 @@ WORKDIR /usr/local/src/owntone-server/
 
 RUN /usr/local/bin/build-owntone.sh
 
+ARG LATEST_GIT_TAG
+ENV LATEST_GIT_TAG=${LATEST_GIT_TAG}
 COPY --chown=owntone:owntone builder/package-owntone.sh /usr/local/bin/package-owntone.sh
 COPY --chown=owntone:owntone builder/after-install.sh /usr/local/src/after-install.sh
 
