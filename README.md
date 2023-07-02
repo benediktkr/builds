@@ -15,6 +15,7 @@ these builds are working (in use in the `sudo.is` infra) and can in theory be pu
  project                                | upstream                                                                           | notes
 ----------------------------------------|------------------------------------------------------------------------------------|----
  [`airconnect`](airconnect)             | :github: [`philippe44/AirConnect`](https://github.com/philippe44/AirConnect)       | docker only
+ [`blink1`](blink1)                     | :github: [`todbot/blink1-tool`](https://github.com/todbot/blink1-tool/)            | for the [blink(1)](https://blink1.thingm.com/)
  [`framework-ectool`](framework-ectool) | :github: [`DHowett/framework-ec`](https://github.com/DHowett/framework-ec)         |
  [`jellyfin-tizen`](jellyfin-tizen)     | :github: [`jellyfin/jellyfin-tizen`](https://github.com/jellyfin/jellyfin-tizen)   |
  [`owntone`](owntone)                   | :github: [`owntone/owntone`](https://github.com/owntone/owntone-server)            |
