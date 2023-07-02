@@ -13,3 +13,6 @@
 [submodule "emacs-docker"]
 	path = emacs-docker
 	url = https://git.sudo.is/ben/emacs-docker.git
+[submodule "hydrogen-web"]
+	path = hydrogen-web
+	url = https://git.sudo.is/ben/hydrogen-docker.git

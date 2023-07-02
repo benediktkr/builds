@@ -16,8 +16,9 @@ these builds are working (in use in the `sudo.is` infra) and can in theory be pu
 ----------------------------------------|------------------------------------------------------------------------------------|----
  [`airconnect`](airconnect)             | :github: [`philippe44/AirConnect`](https://github.com/philippe44/AirConnect)       | docker only
  [`blink1`](blink1)                     | :github: [`todbot/blink1-tool`](https://github.com/todbot/blink1-tool/)            | for the [blink(1)](https://blink1.thingm.com/)
- [`emacs`](emacs)                       | :git: [`git.savannah.gnu.org/cgit/emacs.git`](https://git.savannah.gnu.org/cgit/emacs.git/)                           | compiles emacs from source and publishes as `.deb` packages for ubuntu and debian (uploaded to [`apt.sudo.is`](https://apt.sudo.is))
+ [`emacs`](emacs)                       | :git: [`git.savannah.gnu.org/cgit/emacs.git`](https://git.savannah.gnu.org/cgit/emacs.git/)  | compiles emacs from source and publishes as `.deb` packages for ubuntu and debian (published on [`apt.sudo.is`](https://apt.sudo.is))
  [`framework-ectool`](framework-ectool) | :github: [`DHowett/framework-ec`](https://github.com/DHowett/framework-ec)         |
+ [`hydrogen-web`](hydrogen-web)         | :github: [`vector-im/hydrogen-web`](https://github.com/vector-im/hydrogen-web)     | builds as static html/jss/css files, packaged as`.deb.` package (published on [`apt.sudo.is`](https://apt.sudo.is))
  [`jellyfin-tizen`](jellyfin-tizen)     | :github: [`jellyfin/jellyfin-tizen`](https://github.com/jellyfin/jellyfin-tizen)   |
  [`owntone`](owntone)                   | :github: [`owntone/owntone`](https://github.com/owntone/owntone-server)            |
  [`playonlinux`](socat)                 | [PlayOnLinux](https://www.playonlinux.com/en/)                                     |
@@ -36,9 +37,6 @@ these builds are not ready yet, and are at various stages of 'in progress':
  [`lldap`](lldap)                       | :github: [`nitnelave/lldap`](https://github.com/nitnelave/lldap)                  |
  [`shields`](shields)                   | :github: [`badges/shields`](https://github.com/badges/shields)                    |
 
-## other build repos
-
- * [`ben/hydrogen-docker`](https://git.sudo.is/ben/hydrogen-docker): builds [hydrogen](https://matrix.org/docs/projects/client/hydrogen) as static html/jss/cs files as a `.deb.` package, published on `apt.sudo.is`.
 
 ## repos
 
