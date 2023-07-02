@@ -3,6 +3,6 @@
 
 FROM ghcr.io/home-assistant/home-assistant:stable
 
-RUN apk add python3-dev cups-dev gcc libc-dev
+RUN apk add python3-dev cups-dev gcc libc-dev bluez-dev bluez
 
 ENTRYPOINT /init
