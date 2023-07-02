@@ -4,3 +4,9 @@
 [submodule "playonlinux"]
 	path = playonlinux
 	url = https://git.sudo.is/ben/playonlinux-docker.git
+[submodule "socat-dns"]
+	path = socat-dns
+	url = https://git.sudo.is/ben/socat-dns-docker
+[submodule "socat-dns-docker"]
+	path = socat-dns-docker
+	url = https://git.sudo.is/ben/socat-dns-docker
