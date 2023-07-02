@@ -72,3 +72,18 @@ this branch also includes some rather nice UI improvements.
  * when clicking a podcast, default to adding it to the queue instead of replacing the queue.
    probably: [`/src/webapi/index.js#L92`](https://github.com/owntone/owntone-server/blob/master/web-src/src/webapi/index.js#L78-L112)
    should at least provide enough clues to find it in the html (?)
+
+clicking on an item sends a `POST` request `/api/queue/items/add?uris=library:track:40397&shuffle=false&clear=true&playback=start`.
+
+the request paramaters translate to a more readable:
+
+```json
+{
+  "uris": "library:track:1234",
+  "shuffle": false,
+  "clear": true,
+  "playback": start
+}
+```
+
+so `"clear"` is the issue.
