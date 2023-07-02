@@ -17,7 +17,6 @@ these builds are working (in use in the `sudo.is` infra) and can in theory be pu
  [`airconnect`](airconnect)             | :github: [`philippe44/AirConnect`](https://github.com/philippe44/AirConnect)       | docker only
  [`blink1`](blink1)                     | :github: [`todbot/blink1-tool`](https://github.com/todbot/blink1-tool/)            | for the [blink(1)](https://blink1.thingm.com/)
  [`emacs`](emacs)                       | :git: [`git.savannah.gnu.org/cgit/emacs.git`](https://git.savannah.gnu.org/cgit/emacs.git/)  | compiles emacs from source and publishes as `.deb` packages for ubuntu and debian (published on [`apt.sudo.is`](https://apt.sudo.is))
- [`framework-ectool`](framework-ectool) | :github: [`DHowett/framework-ec`](https://github.com/DHowett/framework-ec)         |
  [`hydrogen-web`](hydrogen-web)         | :github: [`vector-im/hydrogen-web`](https://github.com/vector-im/hydrogen-web)     | builds as static html/jss/css files, packaged as`.deb.` package (published on [`apt.sudo.is`](https://apt.sudo.is))
  [`jellyfin-tizen`](jellyfin-tizen)     | :github: [`jellyfin/jellyfin-tizen`](https://github.com/jellyfin/jellyfin-tizen)   |
  [`owntone`](owntone)                   | :github: [`owntone/owntone`](https://github.com/owntone/owntone-server)            |
@@ -33,6 +32,7 @@ these builds are not ready yet, and are at various stages of 'in progress':
  project                                | upstream                                                                          | notes
 ----------------------------------------|-----------------------------------------------------------------------------------|----
  [`calibre-web`](calibre-web)           | :github: [`janeczku/calibre-web`](https://github.com/janeczku/calibre-web)        |
+ [`framework-ectool`](framework-ectool) | :github: [`DHowett/framework-ec`](https://github.com/DHowett/framework-ec)         |
  [`jellyfin-web`](jellyfin-web)         | :github: [`jellyfin/jellyfin-web`](https://github.com/jellyfin/jellyfin-web)      |
  [`lldap`](lldap)                       | :github: [`nitnelave/lldap`](https://github.com/nitnelave/lldap)                  |
  [`shields`](shields)                   | :github: [`badges/shields`](https://github.com/badges/shields)                    |
