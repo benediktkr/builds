@@ -3,6 +3,7 @@
 
 FROM ghcr.io/home-assistant/home-assistant:stable
 
-RUN apk add python3-dev cups-dev gcc libc-dev bluez-headers bluez mysql-client
+# RUN apk add libc-dev bluez-headers bluez mysql-client
+RUN apk add python3-dev cups-dev gcc
 
 ENTRYPOINT /init
