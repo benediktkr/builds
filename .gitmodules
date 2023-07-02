@@ -1,3 +1,6 @@
 [submodule "blink1"]
 	path = blink1
 	url = https://git.sudo.is/ben/build-blink1
+[submodule "playonlinux"]
+	path = playonlinux
+	url = https://git.sudo.is/ben/playonlinux-docker.git
