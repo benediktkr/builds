@@ -53,13 +53,13 @@ echo "pulling and rebasing the branch for the partial filescans PR: https://gith
     #git rebase file-scan-dir-path
 
     # check out the PR branch with partial scans and rebase the main branch onto it (works now at least)
-    # git checkout file-scan-dir-path
-    # git rebase ${OWNTONE_SRC_REPO_BRANCH}
+    git checkout file-scan-dir-path
+    git rebase ${OWNTONE_SRC_REPO_BRANCH}
 
     # according to a reply to my comment on the PR, their master branch also has the partial rescans,
     # and also the ui elements for it
-    git pull whatdoineed2d master --rebase=true
-    git rebase --reapply-cherry-picks master
+    #git pull whatdoineed2d master --rebase=true
+    #git rebase --reapply-cherry-picks master
 )
 
 # set this in owntone.env!

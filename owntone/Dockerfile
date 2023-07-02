@@ -29,7 +29,7 @@ RUN set -x && \
 
 
 USER owntone
-ENV DISTDIR=/usr/local/src/dist/
+ENV DISTDIR=/usr/local/src/dist
 RUN mkdir ${DISTDIR}
 
 COPY --chown=owntone:owntone owntone-apt/ /usr/local/src/owntone-apt/
