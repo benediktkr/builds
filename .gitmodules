@@ -10,3 +10,6 @@
 [submodule "socat-dns-docker"]
 	path = socat-dns-docker
 	url = https://git.sudo.is/ben/socat-dns-docker
+[submodule "emacs-docker"]
+	path = emacs-docker
+	url = https://git.sudo.is/ben/emacs-docker.git
