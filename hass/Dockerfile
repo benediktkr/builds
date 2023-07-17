@@ -4,6 +4,11 @@
 FROM ghcr.io/home-assistant/home-assistant:stable
 
 # RUN apk add libc-dev bluez-headers bluez mysql-client
-RUN apk add python3-dev cups-dev gcc musl-dev bluez-dev
+
+# mysql-clielent is so hass wont use the slower pymysql
+RUN apk add libc-dev python3-dev cups-dev gcc mysql-client
+
+# fix pybluez dependency, dependencies to build wheel
+RUN apk add musl-dev bluez-dev
 
 ENTRYPOINT /init
