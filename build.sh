@@ -35,7 +35,10 @@ if [[ -f "${PROJECT_PIPELINE}/build.sh" && "${PROJECT}" == "owntone" ]]; then
             echo
         fi
     )
-    exit 0
+    exit $?
+else
+  echo "no file '${PROJECT_PIPELINE}/build.sh' found"
+  #exit 0
 fi
 
 
