@@ -9,6 +9,6 @@ FROM ghcr.io/home-assistant/home-assistant:stable
 RUN apk add libc-dev python3-dev cups-dev gcc mysql-client
 
 # fix pybluez dependency, dependencies to build wheel
-RUN apk add musl-dev bluez-dev
+#RUN apk add musl-dev bluez-dev
 
 ENTRYPOINT /init
