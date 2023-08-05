@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    options {
+        timestamps()
+        ansiColor("xterm256-color")
+        disableConcurrentBuilds()
+    }
+
+    stages {
+        stage('build') {
+            steps {
+                sh "ls -1"
+            }
+        }
+    }
+    post {
+        cleanup {
+            cleanWs(deleteDirs: true,
+                    disableDeferredWipeout: true,
+                    notFailBuild: true)
+        }
+    }
+}
