@@ -1,5 +1,11 @@
 # owntone
 
+[![Build Status](https://jenkins.sudo.is/buildStatus/icon?job=builds%2Fowntone%2Fmain&style=flat-square)](https://jenkins.sudo.is/job/builds/job/owntone/job/main/)
+[![git](../docs/img/shields/git.sudo.is-ben-builds.svg)](https://git.sudo.is/ben/builds/src/branch/main/owntone)
+[![github](https://git.sudo.is/ben/infra/media/branch/main/docs/img/shields/github-benediktkr.svg)](https://github.com/benediktkr/builds/tree/main/owntone)
+[![matrix](https://git.sudo.is/ben/infra/media/branch/main/docs/img/shields/matrix-ben-sudo.is.svg)](https://matrix.to/#/@ben:sudo.is)
+
+
 a custom docker container for [`owntone`](https://github.com/owntone/owntone-server)
 since the upstream repo points to a docker container from linuximage.io, which are
 terrible because the run as root an run a whole init system for some inexplicable

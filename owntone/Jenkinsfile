@@ -1,3 +1,6 @@
+def owntone_main_branch = "master"
+def clean_ws_after_build = false
+
 pipeline {
     agent any
     parameters {
@@ -6,8 +9,9 @@ pipeline {
     }
     options {
         timestamps()
-        ansiColor("xterm256-color")
+        ansiColor("xterm")
         disableConcurrentBuilds()
+        checkoutToSubdirectory 'builds'
         buildDiscarder(
             logRotator(
                 // daysToKeepStr: '15',
@@ -16,55 +20,59 @@ pipeline {
                 artifactNumToKeepStr: '1'
             )
         )
-    }
-    environment {
-        OWNTONE_MAIN_BRANCH = "master"
+
     }
     stages {
+        stage('clean') {
+            when {
+                expression { clean_ws_after_build == false }
+            }
+            steps {
+                cleanWs()
+            }
+        }
         stage('checkout') {
             steps {
-                // clones this repo
-                checkout scm
-                // by cloning our own mirrors we can potentially use webhooks
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: 'refs/heads/${env.OWNTONE_MAIN_BRANCH}']],
-                    extensions: [[
-                        $class: 'RelativeTargetDirectory',
-                        relativeTargetDir: 'owntone-server'
-                    ]],
-                    doGenerateSubmoduleConfigurations: false,
-                    userRemoteConfigs: [[
-                        url: 'https://git.sudo.is/mirrors/owntone-server.git'
-                    ]],
-                ])
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: 'refs/heads/${env.OWNTONE_MAIN_BRANCH}']],
-                    extensions: [[
-                        $class: 'RelativeTargetDirectory',
-                        relativeTargetDir: 'owntone-apt'
-                    ]],
-                    doGenerateSubmoduleConfigurations: false,
-                    userRemoteConfigs: [[
-                        url: 'https://git.sudo.is/mirrors/owntone-apt.git'
-                    ]],
-                ])
+                script {
+                    // can also use env.JOB_NAME
+                    sh "ln -s builds/owntone owntone"
 
+                    // clone the owntone repos
+                    def mirrors = "https://git.sudo.is/mirrors"
+                    dir('owntone-server') {
+                        git url: "${mirrors}/owntone-server.git", branch: owntone_main_branch
+                    }
+                    dir('owntone-apt') {
+                        git url: "${mirrors}/owntone-apt.git", branch: owntone_main_branch
+                    }
+
+                    // clone whatdoineed2d's fork if we will rebase their file-scan-dir branch
+                    if (params.rebase_filescans) {
+                        dir('owntone-server') {
+                            sh "git remote add whatdoineed2d https://github.com/whatdoineed2do/forked-daapd"
+                            sh "git fetch whatdoineed2d file-scan-dir-path"
+                            sh "git branch"
+                        }
+                    }
+                }
             }
         }
         stage('l') {
             steps {
-                sh "pwd"
-                sh "ls -1"
+                script {
+                    sh "pwd"
+                    sh "ls -l"
+                }
             }
         }
     }
     post {
         cleanup {
-            cleanWs(deleteDirs: true,
-                    disableDeferredWipeout: true,
-                    notFailBuild: true)
+            script {
+                if (clean_ws_after_build == true) {
+                    cleanWs(deleteDirs: true, disableDeferredWipeout: true, notFailBuild: true)
+                }
+            }
         }
     }
 }
