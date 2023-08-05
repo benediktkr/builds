@@ -3,11 +3,12 @@
 set -e
 
 source ./.pipeline/owntone.env
+
+# for (failed) attemps at changing the default url
 source ./.pipeline/owntone-url.env
 
-if [ "$VITE_OWNTONE_URL" = "" ]; then
+if [[ "$VITE_OWNTONE_URL" == "" ]]; then
     echo "VITE_OWNTONE_URL is not set, default will be used!"
-    sleep 10
 fi
 
 . ./.pipeline/init-git.sh

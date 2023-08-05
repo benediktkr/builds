@@ -1,14 +1,61 @@
 pipeline {
     agent any
+    parameters {
+        booleanParam(name: "rebase_filescans", defaultValue: true, description: "rebase branch for owntone-server#1179 from github:whatdoineed2do/forked-daapd")
+        string(name: "VITE_OWNTONE_URL", defaultValue: "owntone.local", description: "build with different default url (when we start building the frontend). currently does nothing, and is ignored if its the default value (but its annoying)")
+    }
     options {
         timestamps()
         ansiColor("xterm256-color")
         disableConcurrentBuilds()
+        buildDiscarder(
+            logRotator(
+                // daysToKeepStr: '15',
+                // artifactDaysToKeepStr: '15',
+                numToKeepStr:'30',
+                artifactNumToKeepStr: '1'
+            )
+        )
     }
-
+    environment {
+        OWNTONE_MAIN_BRANCH = "master"
+    }
     stages {
-        stage('build') {
+        stage('checkout') {
             steps {
+                // clones this repo
+                checkout scm
+                // by cloning our own mirrors we can potentially use webhooks
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: 'refs/heads/${env.OWNTONE_MAIN_BRANCH}']],
+                    extensions: [[
+                        $class: 'RelativeTargetDirectory',
+                        relativeTargetDir: 'owntone-server'
+                    ]],
+                    doGenerateSubmoduleConfigurations: false,
+                    userRemoteConfigs: [[
+                        url: 'https://git.sudo.is/mirrors/owntone-server.git'
+                    ]],
+                ])
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: 'refs/heads/${env.OWNTONE_MAIN_BRANCH}']],
+                    extensions: [[
+                        $class: 'RelativeTargetDirectory',
+                        relativeTargetDir: 'owntone-apt'
+                    ]],
+                    doGenerateSubmoduleConfigurations: false,
+                    userRemoteConfigs: [[
+                        url: 'https://git.sudo.is/mirrors/owntone-apt.git'
+                    ]],
+                ])
+
+            }
+        }
+        stage('l') {
+            steps {
+                sh "pwd"
                 sh "ls -1"
             }
         }
