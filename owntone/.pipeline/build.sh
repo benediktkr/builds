@@ -14,57 +14,55 @@ fi
 . ./.pipeline/init-git.sh
 
 mkdir -pv ./dist/
-rm -rv ./dist/dark-reader || true
+
 rm -rv ./dist/target || true
 rm -v ./dist/*.tar.gz || true
 rm -v ./dist/*.deb || true
 
 
-# try adding dark-reader generated css file. this applies a patch that adds it to
-# the Makefile that builds htdocs, and adds it to index.html after the original
-# index.css file loads
+# first i tried adding dark-reader.css here, before 'docker build', by creating a .patch file, and modifying
+# the index.html file and its Makefile before they were called (which they may not be)
 #
-# create the .patch file with (dont include the huge css file):
-#   git diff --patch > ../dark-reader/dark-reader-css.patch
-
-# # chdir into the git tree to apply the patch
-# (
-#     # copy into the git tree and apply the patch
-#     cd owntone-server/
-#     git apply ../dark-reader/dark-reader-css.patch
-# )
-
-# # then copy the css file
-# cp dark-reader/dark-reader.css owntone-server/htdocs/assets
+# now its been moved to happen inside the docker container
+#
+# see more in builder/dark-reader.sh
 
 
-# git --no-pager diff --color=always
-# cp ../
+# ./builder/dark-reader.sh
 
 # if [[ -z "${OWNTONE_DOCKER_TAG}" ]]; then
 #     OWNTONE_DOCKER_TAG="latest"
 # fi
 
 
-cd owntone-server/
-LATEST_GIT_TAG=$(git tag -l | egrep "^[0-9]+\." | tail -n 1 | tr -d '\n')
-cd ..
+# in build-owntone.sh this gets used as a fallback (if 'owntone --version' doesnt work)
+# but it is currently commented out, so nothing uses this.
+LATEST_GIT_TAG=$(git -C owntone-server/ tag -l | egrep "^[0-9]+\." | tail -n 1 | tr -d '\n')
+echo "latest git tag in 'owntone-server': $LATEST_GIT_TAG"
 
-docker build --pull --build-arg "VITE_OWNTONE_URL=$VITE_OWNTONE_URL" --build-arg "LATEST_GIT_TAG=$LATEST_GIT_TAG" --target builder -t owntone:latest-builder .
-docker run -u $(id -u) --name owntone-build --rm -it -v $(pwd)/dist/:/mnt/dist/ owntone:latest-builder cp -r /usr/local/src/dist/. /mnt/dist/
+docker \
+    build \
+    --pull \
+    --build-arg "VITE_OWNTONE_URL=$VITE_OWNTONE_URL" \
+    --build-arg "LATEST_GIT_TAG=$LATEST_GIT_TAG" \
+    --target builder \
+    -t owntone:latest-builder \
+    .
+
+
+docker \
+    run \
+    -u $(id -u) \
+    --name owntone-build \
+    --rm \
+    -it \
+    -v $(pwd)/dist/:/mnt/dist/ \
+    owntone:latest-builder \
+    cp -r /usr/local/src/dist/. /mnt/dist/
 
 docker build --pull --build-arg "VITE_OWNTONE_URL=$VITE_OWNTONE_URL" --build-arg "LATEST_GIT_TAG=$LATEST_GIT_TAG" -t ${DOCKER_REPO}/owntone:${OWNTONE_DOCKER_TAG} .
 
-if [[ -d "./dist/dark-reader/" && -f "./dist/dark-reader/index.html" ]]; then
-    echo
-    echo
-    (
-        set -x
-        diff --color=always ./dist/dark-reader/index.html ./dist/dark-reader/index.html.orig
-    ) || true
-    echo
-    echo
-fi
+./builder/dark-reader-show-diff.sh
 
 echo "VITE_OWNTONE_URL=\"${VITE_OWNTONE_URL}\""
 echo "OWNTONE_DOCKER_TAG=\"${OWNTONE_DOCKER_TAG}\""

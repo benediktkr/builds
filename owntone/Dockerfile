@@ -46,6 +46,7 @@ ARG LATEST_GIT_TAG
 ENV LATEST_GIT_TAG=${LATEST_GIT_TAG}
 COPY --chown=owntone:owntone builder/package-owntone.sh /usr/local/bin/package-owntone.sh
 COPY --chown=owntone:owntone builder/after-install.sh /usr/local/src/after-install.sh
+COPY --chown=owntone:owntone builder/dark-reader.sh /usr/local/src/dark-reader.sh
 
 # copy css file from dark-reader (firefox extension) and a modified index.html
 COPY --chown=owntone:owntone dark-reader/ /usr/local/src/dark-reader/
