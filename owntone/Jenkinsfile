@@ -4,8 +4,10 @@ def clean_ws_after_build = false
 pipeline {
     agent any
     parameters {
-        booleanParam(name: "rebase_filescans", defaultValue: true, description: "rebase branch for owntone-server#1179 from github:whatdoineed2do/forked-daapd")
-        string(name: "VITE_OWNTONE_URL", defaultValue: "owntone.local", description: "build with different default url (when we start building the frontend). currently does nothing, and is ignored if its the default value (but its annoying)")
+        booleanParam(name: "rebase_filescans", defaultValue: false, description: "rebase branch for owntone-server#1179 from github:whatdoineed2do/forked-daapd")
+        booleanParam(name: "dark_reader", defaultValue: true, description: "experimental work in progress, add the dark-reader generated css to the build")
+        booleanParam(name: "build_web", defaultValue: true, description: "build the web ui, override the websocket url")
+
     }
     options {
         timestamps()
@@ -35,7 +37,9 @@ pipeline {
             steps {
                 script {
                     // can also use env.JOB_NAME
-                    sh "ln -s builds/owntone owntone"
+                    sh "ln -s builds/owntone/builder builder"
+                    sh "ln -s builds/owntone/dark-reader dark-reader"
+                    sh "ln -s builds/owntone/docker docker"
 
                     // clone the owntone repos
                     def mirrors = "https://git.sudo.is/mirrors"
@@ -46,7 +50,7 @@ pipeline {
                         git url: "${mirrors}/owntone-apt.git", branch: owntone_main_branch
                     }
 
-                    // clone whatdoineed2d's fork if we will rebase their file-scan-dir branch
+                    // add whatdoineed2d's fork and rebase their file-scan-dir branch if rebase_filescans is selected
                     if (params.rebase_filescans) {
                         dir('owntone-server') {
                             sh "git remote add whatdoineed2d https://github.com/whatdoineed2do/forked-daapd"
@@ -57,11 +61,18 @@ pipeline {
                 }
             }
         }
-        stage('l') {
+        stage('build htdocs') {
+            when {
+                expression {
+                    params.build_web == true
+                }
+            }
             steps {
                 script {
-                    sh "pwd"
-                    sh "ls -l"
+                    sh "builder/docker-run-build-web-src.sh"
+                    dir ('dist/htdocs') {
+                        sh "zip -r ../htdocs.zip ."
+                    }
                 }
             }
         }

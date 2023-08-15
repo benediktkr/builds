@@ -1,0 +1,14 @@
+diff --git web-src/src/App.vue web-src/src/App.vue
+index 0636fa10..a1b45146 100644
+--- web-src/src/App.vue
++++ web-src/src/App.vue
+@@ -154,8 +154,7 @@ export default {
+       let wsUrl =
+         protocol +
+         window.location.hostname +
+-        ':' +
+-        vm.$store.state.config.websocket_port
++        "/ws"
+ 
+       if (import.meta.env.DEV && import.meta.env.VITE_OWNTONE_URL) {
+         // If we are running in development mode, construct the websocket url
