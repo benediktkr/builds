@@ -50,6 +50,7 @@ pipeline {
                         git url: "${mirrors}/owntone-apt.git", branch: owntone_main_branch
                     }
                     sh "ls -l"
+                    sh "ls -l builder/"
                 }
             }
         }
