@@ -5,7 +5,7 @@ pipeline {
     agent any
     parameters {
         booleanParam(name: "rebase_filescans", defaultValue: false, description: "rebase branch for owntone-server#1179 from github:whatdoineed2do/forked-daapd")
-        booleanParam(name: "dark_reader", defaultValue: true, description: "experimental work in progress, add the dark-reader generated css to the build")
+        booleanParam(name: "dark_reader", defaultValue: false, description: "experimental work in progress, add the dark-reader generated css to the build")
         booleanParam(name: "build_web", defaultValue: true, description: "build the web ui, override the websocket url")
 
     }
@@ -49,14 +49,23 @@ pipeline {
                     dir('owntone-apt') {
                         git url: "${mirrors}/owntone-apt.git", branch: owntone_main_branch
                     }
-
+                    sh "ls -l"
+                }
+            }
+        }
+        stage('rebase filescans branch') {
+            when {
+                expression {
+                    params.build_web == true
+                }
+            }
+            steps {
+                script {
                     // add whatdoineed2d's fork and rebase their file-scan-dir branch if rebase_filescans is selected
-                    if (params.rebase_filescans) {
-                        dir('owntone-server') {
-                            sh "git remote add whatdoineed2d https://github.com/whatdoineed2do/forked-daapd"
-                            sh "git fetch whatdoineed2d file-scan-dir-path"
-                            sh "git branch"
-                        }
+                    dir('owntone-server') {
+                        sh "git remote add whatdoineed2d https://github.com/whatdoineed2do/forked-daapd"
+                        sh "git fetch whatdoineed2d file-scan-dir-path"
+                        sh "git branch"
                     }
                 }
             }
