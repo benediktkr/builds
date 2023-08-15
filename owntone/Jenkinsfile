@@ -1,5 +1,4 @@
 def owntone_main_branch = "master"
-def clean_ws_after_build = false
 
 pipeline {
     agent any
@@ -13,7 +12,7 @@ pipeline {
         timestamps()
         ansiColor("xterm")
         disableConcurrentBuilds()
-        checkoutToSubdirectory 'builds'
+        // checkoutToSubdirectory('builds')
         buildDiscarder(
             logRotator(
                 // daysToKeepStr: '15',
@@ -24,46 +23,45 @@ pipeline {
         )
 
     }
+    // environment {
+    //     WORKSPACE="${WORKSPACE}/owntone"
+    // }
     stages {
-        stage('clean') {
-            when {
-                expression { clean_ws_after_build == false }
-            }
-            steps {
-                cleanWs()
-            }
-        }
         stage('checkout') {
             steps {
-                script {
-                    // can also use env.JOB_NAME
-                    sh "ln -s builds/owntone/builder builder"
-                    sh "ln -s builds/owntone/dark-reader dark-reader"
-                    sh "ln -s builds/owntone/docker docker"
+                dir('owntone') {
+                    // // can also use env.JOB_NAME
+                    // sh "ln -s builds/owntone/builder builder"
+                    // sh "ln -s builds/owntone/dark-reader dark-reader"
+                    // sh "ln -s builds/owntone/docker docker"
 
-                    // clone the owntone repos
-                    def mirrors = "https://git.sudo.is/mirrors"
-                    dir('owntone-server') {
-                        git url: "${mirrors}/owntone-server.git", branch: owntone_main_branch
+                    script {
+                        // clone the owntone repos
+                        def mirrors = "https://git.sudo.is/mirrors"
+                        dir('owntone-server') {
+                            git url: "${mirrors}/owntone-server.git", branch: owntone_main_branch
+                        }
+                        dir('owntone-apt') {
+                            git url: "${mirrors}/owntone-apt.git", branch: owntone_main_branch
+                        }
+                        sh "ls -l"
+                        sh "pwd"
+                        sh "ls -l dist"
+                        // sh "ls -l builder/"
                     }
-                    dir('owntone-apt') {
-                        git url: "${mirrors}/owntone-apt.git", branch: owntone_main_branch
-                    }
-                    sh "ls -l"
-                    sh "ls -l builder/"
                 }
             }
         }
         stage('rebase filescans branch') {
             when {
                 expression {
-                    params.build_web == true
+                    params.rebase_filescans == true
                 }
             }
             steps {
-                script {
+                dir('owntone/owntone-server') {
                     // add whatdoineed2d's fork and rebase their file-scan-dir branch if rebase_filescans is selected
-                    dir('owntone-server') {
+                    script {
                         sh "git remote add whatdoineed2d https://github.com/whatdoineed2do/forked-daapd"
                         sh "git fetch whatdoineed2d file-scan-dir-path"
                         sh "git branch"
@@ -78,22 +76,28 @@ pipeline {
                 }
             }
             steps {
-                script {
-                    sh "builder/docker-run-build-web-src.sh"
-                    dir ('dist/htdocs') {
-                        sh "zip -r ../htdocs.zip ."
+                dir('owntone') {
+                    script {
+                        sh "builder/docker-run-build-web-src.sh"
+                        dir ('dist/htdocs') {
+                            sh "zip -r ../htdocs.zip ."
+                        }
                     }
                 }
             }
         }
     }
     post {
-        cleanup {
-            script {
-                if (clean_ws_after_build == true) {
-                    cleanWs(deleteDirs: true, disableDeferredWipeout: true, notFailBuild: true)
-                }
+        success {
+            dir('owntone') {
+                archiveArtifacts(
+                    artifacts: 'dist/*.tar.gz,dist/*.deb,dist/*.zip',
+                    fingerprint: true
+                )
             }
+        }
+        cleanup {
+            cleanWs(deleteDirs: true, disableDeferredWipeout: true, notFailBuild: true)
         }
     }
 }

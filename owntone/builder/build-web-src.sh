@@ -12,6 +12,11 @@
 # ./dist/htdocs/:/dist/htdocs
 
 set -e
+set -x
+
+
+env
+id
 
 # the script expects to have /owntone-server/web-src as its WORKDIR, but we cd there anyway
 
@@ -21,4 +26,4 @@ pwd
 patch -p1 -t -i /builder/wsurl.patch
 
 npm install
-npm run build -- --minify=false --outDir=/dist/htdocs
+npm run build -- --minify=false --outDir=/dist/htdocs --emptyOutDir
