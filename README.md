@@ -22,7 +22,7 @@ these builds are working (in use in the `sudo.is` infra) and can in theory be pu
  [`owntone`](owntone)                   | :github: [`owntone/owntone`](https://github.com/owntone/owntone-server)            |
  [`playonlinux`](socat)                 | [PlayOnLinux](https://www.playonlinux.com/en/)                                     |
  [`shairport`](shairport)               | :github: [`mikebrady/shairport-sync`](https://github.com/mikebrady/shairport-sync) | docker only
- [`socat-dns-docker`](socat-dns-docker) | N/A                                                                                | using `socat` to forward the dns server for a bridged docker network
+ [`socat-dns`](socat-dns)               | N/A                                                                                | using `socat` to forward the dns server for a bridged docker network
  [`synapse-admin`](`synapse-admin`)     | :github: [`Awesome-Technologies/synapse-admin`](https://github.com/Awesome-Technologies/synapse-admin) | 
 
 ### in progress / not ready
@@ -37,6 +37,36 @@ these builds are not ready yet, and are at various stages of 'in progress':
  [`lldap`](lldap)                       | :github: [`nitnelave/lldap`](https://github.com/nitnelave/lldap)                  |
  [`shields`](shields)                   | :github: [`badges/shields`](https://github.com/badges/shields)                    |
 
+
+## adding submodules 
+
+
+new submodule:
+
+```shell
+branch=main
+
+# add submodule to track a branch
+git submodule add -b $branch $url;
+
+# update submodule
+git submodule update --remote
+```
+
+change existing submodule to track a branch
+
+```shell 
+submodule=foo
+branch=main
+
+# change the submodule defintion in the parent repo
+git config -f .gitmodules submodule.${submodule}.branch $branch
+
+# and make sure the submodule itself is actually at that branch
+cd $submodule
+git checkout $branch
+git branch -u origin/$branch $branch
+```
 
 ## repos
 

@@ -1,21 +1,24 @@
 [submodule "blink1"]
 	path = blink1
 	url = https://git.sudo.is/ben/build-blink1
+	branch = main
 [submodule "playonlinux"]
 	path = playonlinux
 	url = https://git.sudo.is/ben/playonlinux-docker.git
+	branch = main
 [submodule "socat-dns"]
 	path = socat-dns
 	url = https://git.sudo.is/ben/socat-dns-docker
-[submodule "socat-dns-docker"]
-	path = socat-dns-docker
-	url = https://git.sudo.is/ben/socat-dns-docker
-[submodule "emacs-docker"]
-	path = emacs-docker
-	url = https://git.sudo.is/ben/emacs-docker.git
+	branch = main
 [submodule "hydrogen-web"]
 	path = hydrogen-web
 	url = https://git.sudo.is/ben/hydrogen-docker.git
+	branch = main
 [submodule "synapse-admin"]
 	path = synapse-admin
 	url = https://git.sudo.is/ben/synapse-admin-docker
+	branch = main
+[submodule "emacs-docker"]
+	path = emacs-docker
+	url = https://git.sudo.is/ben/emacs-docker
+	branch = main
