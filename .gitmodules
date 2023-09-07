@@ -16,3 +16,6 @@
 [submodule "hydrogen-web"]
 	path = hydrogen-web
 	url = https://git.sudo.is/ben/hydrogen-docker.git
+[submodule "synapse-admin"]
+	path = synapse-admin
+	url = https://git.sudo.is/ben/synapse-admin-docker

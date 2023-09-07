@@ -23,7 +23,7 @@ these builds are working (in use in the `sudo.is` infra) and can in theory be pu
  [`playonlinux`](socat)                 | [PlayOnLinux](https://www.playonlinux.com/en/)                                     |
  [`shairport`](shairport)               | :github: [`mikebrady/shairport-sync`](https://github.com/mikebrady/shairport-sync) | docker only
  [`socat-dns-docker`](socat-dns-docker) | N/A                                                                                | using `socat` to forward the dns server for a bridged docker network
-
+ [`synapse-admin`](`synapse-admin`)     | :github: [`Awesome-Technologies/synapse-admin`](https://github.com/Awesome-Technologies/synapse-admin) | 
 
 ### in progress / not ready
 
