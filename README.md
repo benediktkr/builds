@@ -14,19 +14,19 @@ but most have their own repos. It is a lot easier to work with CI systems that e
 
 these builds are working (in use in the `sudo.is` infra) and can in theory be publicly used:
 
- project                                | upstream                                                                           | notes
-----------------------------------------|------------------------------------------------------------------------------------|----
- [`airconnect`](airconnect)             | :github: [`philippe44/AirConnect`](https://github.com/philippe44/AirConnect)       | docker only
- [`blink1`](blink1)                     | :github: [`todbot/blink1-tool`](https://github.com/todbot/blink1-tool/)            | for the [blink(1)](https://blink1.thingm.com/)
- [`emacs`](emacs)                       | :git: [`git.savannah.gnu.org/cgit/emacs.git`](https://git.savannah.gnu.org/cgit/emacs.git/)  | compiles emacs from source and publishes as `.deb` packages for ubuntu and debian (published on [`apt.sudo.is`](https://apt.sudo.is))
- [`hydrogen-web`](hydrogen-web)         | :github: [`vector-im/hydrogen-web`](https://github.com/vector-im/hydrogen-web)     | builds as static html/jss/css files, packaged as`.deb.` package (published on [`apt.sudo.is`](https://apt.sudo.is))
- [`jellyfin-tizen`](jellyfin-tizen)     | :github: [`jellyfin/jellyfin-tizen`](https://github.com/jellyfin/jellyfin-tizen)   |
- [`jenkins`](jenkins-docker)            | :github: [`jenkinsci/jenkins`](https://github.com/jenkinsci/jenkins)               |
- [`owntone`](owntone)                   | :github: [`owntone/owntone`](https://github.com/owntone/owntone-server)            |
- [`playonlinux`](socat)                 | [PlayOnLinux](https://www.playonlinux.com/en/)                                     |
- [`shairport`](shairport)               | :github: [`mikebrady/shairport-sync`](https://github.com/mikebrady/shairport-sync) | docker only
- [`socat-dns`](socat-dns)               | N/A                                                                                | using `socat` to forward the dns server for a bridged docker network
- [`synapse-admin`](`synapse-admin`)     | :github: [`Awesome-Technologies/synapse-admin`](https://github.com/Awesome-Technologies/synapse-admin) |
+ project                                                 | upstream                                                                           | notes
+---------------------------------------------------------|------------------------------------------------------------------------------------|----
+ [`airconnect`](airconnect)                              | :github: [`philippe44/AirConnect`](https://github.com/philippe44/AirConnect)       | docker only
+ [`blink1`](../../../../build-blink1)                    | :github: [`todbot/blink1-tool`](https://github.com/todbot/blink1-tool/)            | for the [blink(1)](https://blink1.thingm.com/)
+ [`emacs`](../../../../emacs-docker)                     | :git: [`git.savannah.gnu.org/cgit/emacs.git`](https://git.savannah.gnu.org/cgit/emacs.git/)  | compiles emacs from source and publishes as `.deb` packages for ubuntu and debian (published on [`apt.sudo.is`](https://apt.sudo.is))
+ [`hydrogen-web`](../../../../hydrogen-docker)           | :github: [`vector-im/hydrogen-web`](https://github.com/vector-im/hydrogen-web)     | builds as static html/jss/css files, packaged as`.deb.` package (published on [`apt.sudo.is`](https://apt.sudo.is))
+ [`jellyfin-tizen`](jellyfin-tizen)                      | :github: [`jellyfin/jellyfin-tizen`](https://github.com/jellyfin/jellyfin-tizen)   |
+ [`jenkins`](../../../../jenkins-docker)                 | :github: [`jenkinsci/jenkins`](https://github.com/jenkinsci/jenkins)               |
+ [`owntone`](owntone)                                    | :github: [`owntone/owntone`](https://github.com/owntone/owntone-server)            |
+ [`playonlinux`](../../../../playonlinux-docker)         | [PlayOnLinux](https://www.playonlinux.com/en/)                                     |
+ [`shairport`](shairport)                                | :github: [`mikebrady/shairport-sync`](https://github.com/mikebrady/shairport-sync) | docker only
+ [`socat-dns`](../../../../socat-dns-docker)             | N/A                                                                                | using `socat` to forward the dns server for a bridged docker network
+ [`synapse-admin`](../../../../synapse-admin-docker)     | :github: [`Awesome-Technologies/synapse-admin`](https://github.com/Awesome-Technologies/synapse-admin) |
 
 ### in progress / not ready
 
