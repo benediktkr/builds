@@ -30,3 +30,7 @@
 	path = owntone
 	url = https://git.sudo.is/ben/build-owntone
 	branch = main
+[submodule "hass"]
+	path = hass
+	url = https://git.sudo.is/ben/build-hass
+	branch = main
