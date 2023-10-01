@@ -26,3 +26,7 @@
 	path = jenkins-docker
 	url = https://git.sudo.is/ben/jenkins-docker
 	branch = main
+[submodule "owntone"]
+	path = owntone
+	url = https://git.sudo.is/ben/build-owntone
+	branch = main

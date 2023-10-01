@@ -21,8 +21,8 @@ these builds are working (in use in the `sudo.is` infra) and can in theory be pu
  [`emacs`](emacs)                       | :git: [`git.savannah.gnu.org/cgit/emacs.git`](https://git.savannah.gnu.org/cgit/emacs.git/)  | compiles emacs from source and publishes as `.deb` packages for ubuntu and debian (published on [`apt.sudo.is`](https://apt.sudo.is))
  [`hydrogen-web`](hydrogen-web)         | :github: [`vector-im/hydrogen-web`](https://github.com/vector-im/hydrogen-web)     | builds as static html/jss/css files, packaged as`.deb.` package (published on [`apt.sudo.is`](https://apt.sudo.is))
  [`jellyfin-tizen`](jellyfin-tizen)     | :github: [`jellyfin/jellyfin-tizen`](https://github.com/jellyfin/jellyfin-tizen)   |
- [`jenkins`](../../../../jenkins-docker)| :github: [`jenkinsci/jenkins`](https://github.com/jenkinsci/jenkins)               |
- [`owntone`](../build-owntone)          | :github: [`owntone/owntone`](https://github.com/owntone/owntone-server)            |
+ [`jenkins`](jenkins-docker)            | :github: [`jenkinsci/jenkins`](https://github.com/jenkinsci/jenkins)               |
+ [`owntone`](owntone)                   | :github: [`owntone/owntone`](https://github.com/owntone/owntone-server)            |
  [`playonlinux`](socat)                 | [PlayOnLinux](https://www.playonlinux.com/en/)                                     |
  [`shairport`](shairport)               | :github: [`mikebrady/shairport-sync`](https://github.com/mikebrady/shairport-sync) | docker only
  [`socat-dns`](socat-dns)               | N/A                                                                                | using `socat` to forward the dns server for a bridged docker network
