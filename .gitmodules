@@ -22,3 +22,7 @@
 	path = emacs-docker
 	url = https://git.sudo.is/ben/emacs-docker
 	branch = main
+[submodule "jenkins-docker"]
+	path = jenkins-docker
+	url = https://git.sudo.is/ben/jenkins-docker
+	branch = main
