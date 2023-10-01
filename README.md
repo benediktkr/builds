@@ -16,7 +16,7 @@ these builds are working (in use in the `sudo.is` infra) and can in theory be pu
 
  project                                                 | upstream                                                                           | notes
 ---------------------------------------------------------|------------------------------------------------------------------------------------|----
- [`airconnect`](airconnect)                              | :github: [`philippe44/AirConnect`](https://github.com/philippe44/AirConnect)       | docker only
+ [`airconnect`](../../../../build-airconnect)            | :github: [`philippe44/AirConnect`](https://github.com/philippe44/AirConnect)       | docker only
  [`blink1`](../../../../build-blink1)                    | :github: [`todbot/blink1-tool`](https://github.com/todbot/blink1-tool/)            | for the [blink(1)](https://blink1.thingm.com/)
  [`emacs`](../../../../emacs-docker)                     | :git: [`git.savannah.gnu.org/cgit/emacs.git`](https://git.savannah.gnu.org/cgit/emacs.git/)  | compiles emacs from source and publishes as `.deb` packages for ubuntu and debian (published on [`apt.sudo.is`](https://apt.sudo.is))
  [`hass`](../../../../build-hass)                        | :github: [`home-assistant/core`](https://github.com/home-assistant/core)

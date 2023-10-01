@@ -34,3 +34,7 @@
 	path = hass
 	url = https://git.sudo.is/ben/build-hass
 	branch = main
+[submodule "airconnect"]
+	path = airconnect
+	url = https://git.sudo.is/ben/build-airconnect
+	branch = main
